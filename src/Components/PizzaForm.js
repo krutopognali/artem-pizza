@@ -10,7 +10,7 @@
 import { useState } from "react";
 import { calculatePrice } from "../calculatePrice";
 
-export function PizzaForm() {
+export function PizzaForm({ onPizzaCreated }) {
   const [size, setSize] = useState("medium");
   const [dough, setDough] = useState("thin");
   const [sauce, setSauce] = useState("tomato");
@@ -55,8 +55,21 @@ export function PizzaForm() {
     }
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onPizzaCreated({
+      size,
+      dough,
+      sauce,
+      cheese,
+      vegetables,
+      meat,
+      price
+    });
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <fieldset>
         <legend>Размер</legend>
         <label>
