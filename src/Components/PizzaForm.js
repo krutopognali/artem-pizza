@@ -8,6 +8,7 @@
 } */
 
 import { useState } from "react";
+import { calculatePrice } from "../calculatePrice";
 
 export function PizzaForm() {
   const [size, setSize] = useState("medium");
@@ -16,6 +17,8 @@ export function PizzaForm() {
   const [cheese, setCheese] = useState([]);
   const [vegetables, setVegetables] = useState([]);
   const [meat, setMeat] = useState([]);
+
+  const price = calculatePrice({ size, cheese, vegetables, meat });
 
   const updateSize = (event) => {
     setSize(event.target.value);
@@ -221,6 +224,7 @@ export function PizzaForm() {
           Ветчина
         </label>
       </fieldset>
+      <button>Заказать за {price} </button>
     </form>
   );
 }
